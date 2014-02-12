@@ -1,6 +1,8 @@
 #!/bin/sh 
 set -e
 
+cat /proc/cpuinfo
+
 MODULE_BENCHMARK_URL="https://glowing-fire-326.firebaseio.com:443/di/moduleInjector.json"
 STATIC_INJECTOR_URL="https://glowing-fire-326.firebaseio.com:443/di/staticInjector.json"
 DYNAMIC_INJECTOR_URL="https://glowing-fire-326.firebaseio.com:443/di/dynamicInjector.json"
