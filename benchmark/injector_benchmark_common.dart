@@ -36,9 +36,7 @@ class InjectorBenchmark extends BenchmarkBase {
       ..type(H);
   }
 
-  teardown() {
-    print(count);
-  }
+  teardown() { }
 }
 
 class AnnOne {

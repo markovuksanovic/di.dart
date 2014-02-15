@@ -5,7 +5,7 @@ import 'injector_benchmark_common.dart';
 import 'score_emitter.dart';
 
 main(List<String> args) {
-  ScoreEmitter emitter = new HttpScoreEmitter(Uri.parse(args[0]));
+  ScoreEmitter emitter = new HttpScoreEmitter();
 
   var typeFactories = new Map();
   typeFactories[A] = (f) => new A(f(B, []), f(C, []));

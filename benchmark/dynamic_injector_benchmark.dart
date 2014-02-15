@@ -6,7 +6,7 @@ import 'score_emitter.dart';
 
 
 main(List<String> args) {
-  ScoreEmitter emitter = new HttpScoreEmitter(Uri.parse(args[0]));
+  ScoreEmitter emitter = new HttpScoreEmitter();
 
   new InjectorBenchmark('DynamicInjectorBenchmark',
       (m) => new DynamicInjector(modules: m), emitter).report();
