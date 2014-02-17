@@ -21,12 +21,18 @@ rm -rf dart-sdk
 unzip $DART_SDK_ZIP > /dev/null
 rm $DART_SDK_ZIP
 
-BENCHMARK_LOGGER_ZIP=benchmark_logger.dart.zip
-curl https://codeload.github.com/markovuksanovic/benchmark_logger.dart/zip/master -o $BENCHMARK_LOGGER_ZIP
-unzip $BENCHMARK_LOGGER_ZIP
-rm $BENCHMARK_LOGGER_ZIP
-
 echo =============================================================================
 . ./scripts/env.sh
 $DART --version
 $PUB install
+
+cd .. # We are in di.dart directory. Position one level up.
+BENCHMARK_LOGGER_ZIP=benchmark_logger.dart.zip
+curl https://codeload.github.com/markovuksanovic/benchmark_logger.dart/zip/master -o $BENCHMARK_LOGGER_ZIP
+unzip $BENCHMARK_LOGGER_ZIP
+rm $BENCHMARK_LOGGER_ZIP
+cd benchmark_logger.dart-master
+$PUB install
+cd ../di.dart #Let's go back into di.dart directory
+
+
