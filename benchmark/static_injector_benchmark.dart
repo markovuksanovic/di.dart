@@ -4,7 +4,7 @@ import 'package:di/static_injector.dart';
 import 'injector_benchmark_common.dart';
 import 'emitter.dart';
 
-main(List<String> args) {
+main() {
   ScoreEmitter emitter = new StdoutScoreEmitter();
 
   var typeFactories = new Map();

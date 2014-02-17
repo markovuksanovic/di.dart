@@ -1,13 +1,11 @@
 #!/bin/sh 
 set -e
 
-MODULE_BENCHMARK_URL="https://glowing-fire-326.firebaseio.com:443/di/moduleInjector.json"
-STATIC_INJECTOR_URL="https://glowing-fire-326.firebaseio.com:443/di/staticInjector.json"
-DYNAMIC_INJECTOR_URL="https://glowing-fire-326.firebaseio.com:443/di/dynamicInjector.json"
+BENCHMARK=../benchmark_logger.dart-master/run.sh
 # run tests in dart
-dart benchmark/module_benchmark.dart $MODULE_BENCHMARK_URL
-dart benchmark/dynamic_injector_benchmark.dart $DYNAMIC_INJECTOR_URL
-dart benchmark/static_injector_benchmark.dart $STATIC_INJECTOR_URL
+$BENCHMARK $(dart benchmark/module_benchmark.dart)
+$BENCHMARK $(dart benchmark/dynamic_injector_benchmark.dart)
+$BENCHMARK $(dart benchmark/static_injector_benchmark.dart)
 
 # run dart2js on tests
 mkdir -p out
@@ -16,9 +14,6 @@ dart2js benchmark/static_injector_benchmark.dart -o out/static_injector_benchmar
 dart2js benchmark/dynamic_injector_benchmark.dart -o out/dynamic_injector_benchmark.dart.js 
 
 # run tests in node
-OUT=$(node out/module_benchmark.dart.js)
-curl -X POST -d "{\"value\":$OUT}" $MODULE_BENCHMARK_URL 
-OUT=$(node out/dynamic_injector_benchmark.dart.js)
-curl -X POST -d "{\"value\":$OUT}" $MODULE_BENCHMARK_URL 
-OUT=$(node out/static_injector_benchmark.dart.js)
-curl -X POST -d "{\"value\":$OUT}" $MODULE_BENCHMARK_URL 
+$BENCHMARK $(node out/module_benchmark.dart.js)
+$BENCHMARK $(node out/dynamic_injector_benchmark.dart.js)
+$BENCHMARK $(node out/static_injector_benchmark.dart.js)
