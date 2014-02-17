@@ -23,7 +23,7 @@ rm $DART_SDK_ZIP
 
 BENCHMARK_LOGGER_ZIP=benchmark_logger.dart.zip
 curl https://codeload.github.com/markovuksanovic/benchmark_logger.dart/zip/master -o $BENCHMARK_LOGGER_ZIP
-tar -xvf benchmark_logger.dart.zip
+unzip $BENCHMARK_LOGGER_ZIP
 rm $BENCHMARK_LOGGER_ZIP
 
 echo =============================================================================
