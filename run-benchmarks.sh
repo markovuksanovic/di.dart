@@ -1,7 +1,7 @@
 #!/bin/sh 
 set -e
 
-BENCHMARK=../benchmark_logger.dart-master/run.sh
+BENCHMARK=./benchmark_logger.dart-master/run.sh
 # run tests in dart
 $BENCHMARK $(dart benchmark/module_benchmark.dart)
 $BENCHMARK $(dart benchmark/dynamic_injector_benchmark.dart)
