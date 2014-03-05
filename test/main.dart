@@ -653,6 +653,13 @@ createInjectorSpec(String injectorName, InjectorFactory injectorFactory) {
 void dynamicInjectorTest() {
   describe('DynamicInjector', () {
 
+    it('should return a set of Keys when asked supported types', () {
+      var module = new Module()..type(Lemon)..type(Engine);
+      var injector = new DynamicInjector(modules : [module]);
+
+      expect(injector.types, new isInstanceOf<Set<Key>>());
+    });
+
     it('should throw a comprehensible error message on untyped argument', () {
       var module = new Module()..type(Lemon)..type(Engine);
       var injector = new DynamicInjector(modules : [module]);

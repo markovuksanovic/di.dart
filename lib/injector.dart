@@ -56,7 +56,7 @@ class Injector {
 
   Injector get root => _root;
 
-  Set<Type> get types {
+  Set<Key> get types {
     var types = new Set.from(_types);
     var parent = this.parent;
     while (parent != null) {
@@ -79,7 +79,7 @@ class Injector {
   }
 
   dynamic _getInstanceByKey(Key key, Injector requester) {
-    _checkTypeConditions(key.type);
+    _checkTypeConditions(key);
 
     if (resolving.contains(key)) {
       throw new CircularDependencyError(
@@ -148,10 +148,10 @@ class Injector {
         '${key}!', key));
   }
 
-  void _checkTypeConditions(Type typeName) {
-    if (_PRIMITIVE_TYPES.contains(typeName)) {
+  void _checkTypeConditions(Key key) {
+    if (_PRIMITIVE_TYPES.contains(key.type)) {
       throw new NoProviderError(_error('Cannot inject a primitive type '
-          'of $typeName!', new Key(typeName)));
+          'of ${key.type}!', key));
     }
   }
 
@@ -170,7 +170,7 @@ class Injector {
    * If there is no parent injector, an implicit binding is used. That is,
    * the token ([Type]) is instantiated.
    */
-  dynamic get(Type type, {Iterable<Type> annotations: const []}) =>
+  dynamic get(Type type, {Iterable<Type> annotations}) =>
       _getInstanceByKey(new Key(type, annotations: annotations), this);
 
   /**

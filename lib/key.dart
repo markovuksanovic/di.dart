@@ -2,32 +2,31 @@ part of di;
 
 class Key {
   final Type type;
-  final Iterable<Type> annotations;
+  final Iterable<Type> _annotations;
   int _hashCode;
 
-  Key(this.type, {Iterable<Type> this.annotations: const []});
+  Key(this.type, {Iterable<Type> annotations})
+      : _annotations = annotations == null ? const [] : annotations;
 
   int get hashCode {
-    if (_hashCode != null) return _hashCode;
-    int result = 629 + type.hashCode;
-    if (annotations != null) {
-      annotations.forEach((a) => result += a.hashCode);
+    if (_hashCode == null) {
+      _hashCode = 629 + type.hashCode;
+      _annotations.forEach((a) => _hashCode += a.hashCode);
     }
-    _hashCode = result;
-    return result;
+    return _hashCode;
   }
 
   bool operator==(other) {
-    return other is Key && other.type == type &&
-        other.annotations.length == annotations.length &&
-        other.annotations.every(annotations.contains);
+    return other is Key &&
+        other.type == type &&
+        other._annotations.length == _annotations.length &&
+        other._annotations.every(_annotations.contains);
   }
 
   String toString() {
     String asString = type.toString();
-    if (annotations.isNotEmpty) {
-      asString += " annotated with: [" + annotations.join(", ") + "]";
-    }
-    return asString;
+    return _annotations.isEmpty
+        ? asString
+        : asString + ' annotated with: [${_annotations.join(", ")}]';
   }
 }
